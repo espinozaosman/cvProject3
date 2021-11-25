@@ -135,27 +135,16 @@
 
                                     </p>
                                     <br>
-                                    <pre><code class="language-html"># app/views/articles/show.html.erb</code></pre>
-                                    <pre><code class="language-html"><%= cache(@article) do %></code></pre>
-                                    <pre><code class="language-html">  &lt;h1&gt;&lt;%= @article.title %&gt;&lt;/h1&gt;</code></pre><br>
-
-                                    <pre><code class="language-html">  &lt;%= simple_format(@article.content) %&gt;<br></code></pre><br>
-
-                                    <pre><code class="language-html">  &lt;section id="responses"&gt;</code></pre>
-                                        <pre><code class="language-html">    &lt;h2&gt;Responses&lt;/h2&gt;</code></pre>
-
-                                        <pre><code class="language-html">    &lt;% @article.responses.each do |response| %&gt;</code></pre>
-                                        <pre><code class="language-html">      &lt;div class="&lt;%= response.read_by?(@current_user) ? 'read' : 'unread' %&gt;"&gt;</code></pre>
-                                            <pre><code class="language-html">        &lt;%= time_tag(response.created_at) %&gt;</code></pre>
-                                            <pre><code class="language-html">        &lt;strong&gt;&lt;%= response.name %&gt;&lt;/strong&gt;: &lt;%= response.content %&gt;</code></pre>
-                                        <pre><code class="language-html">      &lt;/div&gt;</code></pre>
-                                        <pre><code class="language-html">    &lt;% end %&gt;</code></pre>
-                                    <pre><code class="language-html">  &lt;/section&gt;</code></pre>
-                                    <pre><code class="language-html">&lt;% end %&gt;</code></pre>
+                                    <img src="images/Blog-3-1.png" style="border: 2px solid gray; border-radius: 2%;">
+                                    <br>
+                                    <br>
                                     
                                   
                                   <br>
                                   <p>A way to solve this is by adding the currently signed in user to the cache key by using [@article, @current_user] instead of just @article as the argument passed to the cache helper method.</p>
+                                  <br>
+                                  <img src="images/Blog-3-2.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  <br>
                                   <br>
                                   <p>This ensures that each user sees their own unread responses, but negates most of the speedup from caching the fragments, as the article fragments are now cached separately for each user.</p>
                                   <br>
@@ -163,11 +152,74 @@
                                   <br>
                                   <p>Since most of the page is the same for all users, we'd like to reuse the cached article fragment for each visitor. To do this, we can load the article from the cache and add an extra request to fetch the user-specific content after the page is loaded through a JavaScript request. Using a sprinkle of JavaScript functionality for this has a couple of advantages:</p>
                                   <br>
-                                  <p class="education-info">The page can be cached once and be reused for unauthenticated guests, as well as other users without having to separately cache fragments for every user.</p>
-                                    <p class="education-info">The most important content is loaded first for the fastest response time and secondary features, like the unread count, are loaded later.</p>
-                                    <p class="education-info">Since the extra request is done via JavaScript, the whole page can be edge-cached on a CDN to further improve performance.</p>
-                                    <br>
-                                    <br>
+                                  <p class="education-info">The page can be cached once and be reused for
+                                      unauthenticated guests, as well as other users without having to separately cache
+                                      fragments for every user.</p>
+                                  <p class="education-info">The most important content is loaded first for the fastest
+                                      response time and secondary features, like the unread count, are loaded later.</p>
+                                  <p class="education-info">Since the extra request is done via JavaScript, the whole
+                                      page can be edge-cached on a CDN to further improve performance.</p>
+                                  <br>
+                                  <h2><strong>Cleanup</strong></h2>
+                                  <br>
+                                  <p>We'll first remove the dynamic content from our pages to make them easier to cache. We'll remove the @current_user from the cache key in the cache block again, so they're no longer cached for each user. Then, we'll remove the query that finds the unread counts from the controller, and remove the CSS class names from the view.</p>
+                                  <br>
+                                  <img src="images/Blog-3-3.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  <br>
+                                  <br>
+                                  <p>We're left with a generic page that is easier to cache but lacks our unread responses feature. Let's add it back.</p>
+                                  <br>
+                                  <h2><strong>The Endpoint</strong></h2>
+                                  <br>
+                                  <p>We'll first create an endpoint to find the unread responses for a user. We'd like to alter the current state of the page after it's been rendered, so we'll request JSON from it.</p>
+                                  <br>
+                                  <img src="images/Blog-3-4.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  <br>
+                                  <br>
+                                  <img src="images/Blog-3-5.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  <br>
+                                  <br>
+                                  <img src="images/Blog-3-6.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  <br>
+                                  <br>
+                                  <p>Our endpoint will produce a list of unread response IDs.</p>
+                                  <br>
+                                  <img src="images/Blog-3-7.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  <br>
+                                  <br>
+                                  <p><i>Tip:</i> When loading a dynamic component that can be pre-rendered on the server, it's usually faster to do the HTML rendering on the server side, then inject the HTML into your page directly via JavaScript.</p>
+                                  <br>
+                                  <h2><strong>Showing Unread Responses</strong></h2>
+                                  <br>
+                                  <p>Instead of hardcoding the URL for the unread responses endpoint in the JavaScript code, we'll add it to a data attribute in the view, so we can refer to it later.</p>
+                                  <br>
+                                  <img src="images/Blog-3-8.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  <br>
+                                  <br>
+                                  <p>After the page has completed loading, we'll request the unread response IDs from our new endpoint. We'll then use the data from that list to mark each article as unread by adding a CSS class to it.</p>
+                                  <br>
+                                  <img src="images/Blog-3-9.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  <br>
+                                  <br>
+                                  <p>Because our Rails application uses Turbolinks, we'll wait for the page to be loaded by listening for the turbolinks:load event. When that event fires, we'll find the responses box using its ID.</p>
+                                  <br>
+                                  <p>We'll then check if the responses element has a loaded data attribute. We'll set this attribute after updating the unread responses later on, so we don't make any extra requests in case the page is reloaded using the browser's back button.</p>
+                                  <br>
+                                  <p>On the first load, the loaded attribute isn't set yet, so we'll continue to make the request to our endpoint. On success, we'll loop over each article in the returned result, find the response's element by its ID, and add our "unread" CSS class to it.</p>
+                                  <br>
+                                  <h2><strong>Sprinkles!</strong></h2>
+                                  <br>
+                                  <p>Fragment caching reusable content and sprinkling JavaScript onto your pages to add user-specific dynamic bits later on can make your app's initial response time faster by serving most of the important content straight from the cache. Although it takes time to do an extra request and update the page after the main content has been loaded, deferring dynamic content will make your app feel snappier, even when the full request takes longer than serving everything, including the user-specific parts, from the cache.</p>
+                                  <br>
+                                  <p>For more elaborate setups, be sure to check out Stimulus, a JavaScript library that wraps the sprinkles pattern into a framework that ties your HTML views to your JavaScript.</p>
+                                  <br>
+                                  <p>We hope you liked this introduction to JavaScript sprinkles in Rails applications. We'd love to know what you thought of this article, or if you have any questions. We're always on the lookout for topics to investigate and explain, so if there's anything magical in Ruby you'd like to read about, don't hesitate to leave a comment.</p>
+                                  <br>
+                                  <br>
+
+
+
+                                
                                 </div>
                                 
                                 <!-- Comments -->

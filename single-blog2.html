@@ -99,11 +99,12 @@
                                     <div class="post-info">
                                     	<span>October 19th, 2021</span>
                                     </div>  
+                                    <br>
                                     <p><strong>Operators: Operators are basic mathematical symbols that perform some sort of operation/function on operands.</strong></p>
                                     <br>
-                                    <pre><code class="language-html">3 + 5 = 8</code></pre>
-                                    <pre><code class="language-html">3,5 is Operand</code></pre>
-                                    <pre><code class="language-html">+,= is Operator</code></pre>
+                                    <br>
+                                    <img src="images/Blog-2-1.png" style="border: 2px solid gray; border-radius: 2%">
+                                    <br>
                                     <br>
                                     <hr>
                                     <h2><strong>Topics</strong></h2>
@@ -116,36 +117,23 @@
                                   <br>
                                   <hr>
                                   <h2><strong>Basic Operators</strong></h2><br>
+                                  <br>
                                   <p>Addition +, Multiplication *, Subtraction -, Division (quotient) /</p><br>
-                                  <pre><code class="language-html">let a = 10;</code></pre>
-                                  <pre><code class="language-html">let b = 5;</code></pre>
-
-                                  <pre><code class="language-html">console.log(a+b); // Output : 15</code></pre>
-
-                                  <pre><code class="language-html">console.log(a*b); // Output : 50</code></pre>
-
-                                  <pre><code class="language-html">console.log(a-b); // Output : 5</code></pre>
-
-                                  <pre><code class="language-html">console.log(a/b); // Output : 2</code></pre>
+                                  <img src="images/Blog-2-2.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  <br>
                                   <br>
                                   <h2><strong>Remainder %, Exponentiation **</strong></h2>
                                   <br>
-                                  <pre><code class="language-html">let a = 4;</code></pre>
-                                  <pre><code class="language-html">let b = 2;</code></pre>
-
-                                  <pre><code class="language-html">console.log(a%b); // Output : 0</code></pre>
-
-                                  <pre><code class="language-html">console.log(a**b); // Output : 16</code></pre>
+                                  <br>
+                                  <img src="images/Blog-2-3.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  <br>
                                   <br>
                                   <p>Special use of + operator. It is also used for string concatenation. After the introduction of Backticks () in the ES6 version.It is not used that frequently.</p>
                                   <br>
                                   <p><strong>NOTE: + has a special feature to convert operand to string other operators works only with number</strong></p>
                                   <br>
-                                    <pre><code class="language-html">console.log("Vansh " + " Sharma") // Output "Vansh Sharma"</code></pre>
-
-                                    <pre><code class="language-html">console.log('5' + 1) // Output "51"</code></pre>
-
-                                    <pre><code class="language-html">console.log(2+'2'+'1') //Output "221"</code></pre>
+                                  <img src="images/Blog-2-4.png" style="border: 2px solid gray; border-radius: 2%;">
+                                    <br>
                                     <br>
                                     <hr>
                                     <h2><strong>Comparison Operators</strong></h2>
@@ -154,14 +142,82 @@
                                         Greater than >, Less than <, Greater than and equal >=, Less than and equal <
                                     </p>
                                     <br>
-                                    <pre><code class="language-html">console.log(5 > 4); // Output true</code></pre>
-
-                                    <pre><code class="language-html">console.log(5 < 4); // Output false console.log(5>= 4); // Output true</code></pre>
-
-                                    <pre><code class="language-html">console.log(5 <= 5); </pre></code>
+                                    <img src="images/Blog-2-5.png" style="border: 2px solid gray; border-radius: 2%;">
                                     <br>
                                     <br>
-                                    
+                                    <p>Double Equals == only compares the value, Triple Equals === compares the value and datatype both, Not Equal !=/!== It is always preferred to use the latter.</p>
+                                    <br>
+                                    <img src="images/Blog-2-6.png" style="border: 2px solid gray; border-radius: 2%;">
+                                    <br>
+                                    <br>
+                                    <h2><strong>String Comparison</strong></h2>
+                                    <br>
+                                    <p class="education-info">String comparison follows the English dictionary order (Unicode).</p>
+                                    <p class="education-info">While comparing the small letter with a capital letter. Small letters are always considered greater because of the greater index.</p>
+                                    <br>
+                                    <img src="images/Blog-2-7.png" style="border: 2px solid gray; border-radius: 2%;">
+                                    <br>
+                                    <br>
+                                    <p><strong>Point to remember</strong></p>
+                                    <br>
+                                    <p class="education-info">>, <, >=, <= converts null, undefined to 0 and NaN respectively</p>
+                                    <p class="education-info">null and undefined are only equal (==) to each other.</p>
+                                    <br>
+                                    <img src="images/Blog-2-8.png" style="border: 2px solid gray; border-radius: 2%;">
+                                    <br>
+                                    <hr>
+                                    <br>
+                                    <h2><strong>Ternary Operator ?</strong></h2>
+                                    <br>
+                                    <p>It is used as an alternative to small if code.</p>
+                                    <br>
+                                    <p><strong>NOTE: Do not use as a complete alternative to if operator, use this only with small if code expressions.</strong></p>
+                                    <img src="images/Blog-2-9.png" style="border: 2px solid gray; border-radius: 2%;">
+                                    <br>
+                                    <hr>
+                                    <br>
+                                    <h2><strong>Logical Operators</strong></h2>
+                                    <br>
+                                    <p><strong>|| (OR)</strong></p>
+                                    <br>
+                                    <p class="education-info">It always returns the first truthy value. Don't check after that.</p>
+                                    <p class="education-info">Converts the operand to boolean to evaluate the result.</p>
+                                    <p class="education-info">If all operands return the false, returns the last operand.</p>
+                                    <br>
+                                    <img src="images/Blog-2-10.png" style="border: 2px solid gray; border-radius: 2%;">
+                                    <br>
+                                    <br>
+                                    <p><strong>&& (AND)</strong></p>
+                                    <br>
+                                    <p class="education-info">It always returns the first falsy value. Don't check after that.</p>
+                                    <p class="education-info">Converts the operand to boolean to evaluate the result.</p>
+                                    <p class="education-info">If all operands return the true, returns the last operand.</p>
+                                    <br>
+                                    <img src="images/Blog-2-11.png" style="border: 2px solid gray; border-radius: 2%;">
+                                    <br>
+                                    <br>
+                                    <p><strong>! (NOT)</strong></p>
+                                    <br>
+                                    <p class="education-info">Converts the operand to boolean type to evaluate the result.</p>
+                                    <p class="education-info">Returns the inverse value.</p>
+                                    <br>
+                                    <img src="images/Blog-2-12.png" style="border: 2px solid gray; border-radius: 2%;">
+                                    <br>
+                                    <br>
+                                    <p><strong>?? Nullish coalescing operator</strong></p>
+                                    <br>
+                                    <p class="education-info">It returns the first defined value whereas || returns the first truthy value.</p>
+                                    <p class="education-info">0 for || is falsy on the other hand 0 for the ?? is defined value.</p>
+                                    <br>
+                                    <img src="images/Blog-2-13.png" style="border: 2px solid gray; border-radius: 2%;">
+                                    <br>
+                                    <hr>
+                                    <br>
+                                    <h2><strong>Points to remember</strong></h2>
+                                    <br>
+                                    <img src="images/Blog-2-14.png" style="border: 2px solid gray; border-radius: 2%;">
+                                    <br>
+                                    <hr>
 
                                   
                                     
