@@ -74,7 +74,7 @@
                 <div class="col-md-9">
                     	<!--Top Menu -->
                         <div class="responsive-menu hidden-md hidden-lg">MENU</div> 
-                        <i class="fa fa-bars right-menu"></i> 
+                        
                     	<ul class="top-menu wow fadeInRight">
                         	<li> <a href="index.html"><i class="fa fa-user"></i> <span> ABOUT </span></a></li>
                             <li> <a href="index.html#blog"><i class="fa fa-rotate-left"></i> <span >BACK BLOG PAGE</span></a></li>
@@ -124,9 +124,9 @@
 
                                     </p>
                                     <br>
-                                    
+                                    <div class="post-image">
                                         <img src="images/unread.png">
-                                    
+                                    </div>
                                     <br>
                                     <p>If we wrap each article in a cache block, we run the risk of marking the wrong
                                         responses as unread. When a user requests the index page, the response is
@@ -135,7 +135,9 @@
 
                                     </p>
                                     <br>
+                                    <div class="post-image">
                                     <img src="images/Blog-3-1.png" style="border: 2px solid gray; border-radius: 2%;">
+                                    </div>
                                     <br>
                                     <br>
                                     
@@ -143,7 +145,9 @@
                                   <br>
                                   <p>A way to solve this is by adding the currently signed in user to the cache key by using [@article, @current_user] instead of just @article as the argument passed to the cache helper method.</p>
                                   <br>
+                                  <div class="post-image">
                                   <img src="images/Blog-3-2.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  </div>
                                   <br>
                                   <br>
                                   <p>This ensures that each user sees their own unread responses, but negates most of the speedup from caching the fragments, as the article fragments are now cached separately for each user.</p>
@@ -164,7 +168,9 @@
                                   <br>
                                   <p>We'll first remove the dynamic content from our pages to make them easier to cache. We'll remove the @current_user from the cache key in the cache block again, so they're no longer cached for each user. Then, we'll remove the query that finds the unread counts from the controller, and remove the CSS class names from the view.</p>
                                   <br>
+                                  <div class="post-image">
                                   <img src="images/Blog-3-3.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  </div>
                                   <br>
                                   <br>
                                   <p>We're left with a generic page that is easier to cache but lacks our unread responses feature. Let's add it back.</p>
@@ -173,18 +179,26 @@
                                   <br>
                                   <p>We'll first create an endpoint to find the unread responses for a user. We'd like to alter the current state of the page after it's been rendered, so we'll request JSON from it.</p>
                                   <br>
+                                  <div class="post-image">
                                   <img src="images/Blog-3-4.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  </div>
                                   <br>
                                   <br>
+                                  <div class="post-image">
                                   <img src="images/Blog-3-5.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  </div>
                                   <br>
                                   <br>
+                                  <div class="post-image">
                                   <img src="images/Blog-3-6.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  </div>
                                   <br>
                                   <br>
                                   <p>Our endpoint will produce a list of unread response IDs.</p>
                                   <br>
+                                  <div class="post-image">
                                   <img src="images/Blog-3-7.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  </div>
                                   <br>
                                   <br>
                                   <p><i>Tip:</i> When loading a dynamic component that can be pre-rendered on the server, it's usually faster to do the HTML rendering on the server side, then inject the HTML into your page directly via JavaScript.</p>
@@ -193,12 +207,16 @@
                                   <br>
                                   <p>Instead of hardcoding the URL for the unread responses endpoint in the JavaScript code, we'll add it to a data attribute in the view, so we can refer to it later.</p>
                                   <br>
+                                  <div class="post-image">
                                   <img src="images/Blog-3-8.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  </div>
                                   <br>
                                   <br>
                                   <p>After the page has completed loading, we'll request the unread response IDs from our new endpoint. We'll then use the data from that list to mark each article as unread by adding a CSS class to it.</p>
                                   <br>
+                                  <div class="post-image">
                                   <img src="images/Blog-3-9.png" style="border: 2px solid gray; border-radius: 2%;">
+                                  </div>
                                   <br>
                                   <br>
                                   <p>Because our Rails application uses Turbolinks, we'll wait for the page to be loaded by listening for the turbolinks:load event. When that event fires, we'll find the responses box using its ID.</p>
@@ -233,25 +251,7 @@
         </div><!-- .container end -->
     </div> <!-- #wrapper end-->
     
-    <!-- Sidebar Menu -->
-    <div class="slidemenu-fixed">
-        <button class="right-menu slidemenu-close"><i class="fa fa-times" aria-hidden="true"></i></button>  
-        <div class="widget-out">     
-            
-             <!-- Categories Widget-->
-            <div class="widget-submenu widget">
-                <h2 class="widget-title">Categories</h2>
-                    <ul>
-                       <li> <a href="#about">ABOUT</a> </li>
-                       <li> <a href="#resume">RESUME </a> </li>
-                       <li> <a href="#portfolio">PORTFOLIO </a></li>
-                       <li> <a href="#blog">BLOG </a></li>
-                       <li> <a href="#contact">CONTACT </a></li>
-                    </ul>
-             </div>
-             
-        </div>
-    </div>
+    
     <div id="overlay"></div>
     
     
